@@ -2,10 +2,11 @@
 
 #include "headers.hpp"
 
-
 int main() 
 {
     intro();
     
-    display_board();
+    vis_board();
+
+    game_board();
 }
