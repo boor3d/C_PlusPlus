@@ -10,6 +10,9 @@ int main()
     
     boardDisplay();
 
+    takeTurn();
 
+    endGame();
+    
     return 0;
 }

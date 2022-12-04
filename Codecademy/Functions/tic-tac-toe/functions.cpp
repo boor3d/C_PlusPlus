@@ -16,19 +16,23 @@ void intro()
     int player = 1;
     int position = 0;
 
+
+// Show Board to User 
 void boardDisplay()
 {
     std::cout << "     |     |      \n";
-    std::cout << "  0  |  1  |  2   \n";
+    std::cout << "  1  |  2  |  3   \n";
     std::cout << "_____|_____|_____ \n";
     std::cout << "     |     |      \n";
-    std::cout << "  3  |  4  |  5   \n";
+    std::cout << "  4  |  5  |  6   \n";
     std::cout << "_____|_____|_____ \n";
     std::cout << "     |     |      \n";
-    std::cout << "  6  |  7  |  8   \n";
+    std::cout << "  7  |  8  |  9   \n";
     std::cout << "     |     |      \n\n";
 }
 
+
+// Interactive Board For Game
 void gameBoard()
 {
     std::cout << "   |   |   \n";
@@ -41,7 +45,6 @@ void gameBoard()
     std::cout << " " << board[6] << " | " << board[7] << " | " << board[8] << " \n";
     std::cout << "   |   |   \n";
 }
-
 
 
 // Determine if three spots in a row exist 
@@ -80,3 +83,93 @@ bool isWinner()
     return winner;
 }
 
+bool boardFilled()
+{
+    bool filled = true;
+
+    for (int i = 0; i < 9; i++)
+    {
+        if (board[i] == " ")
+        {
+            filled = false;
+        }
+    }
+
+    return filled;
+}
+
+
+void setPosition()
+{
+    cout << "Player " << player << "'s Turn (ENTER 1-9): ";
+
+    while (!(cin >> position))
+    {
+        cout << "Player " << player << ", please enter a valid number between 1 and 9: ";
+        cin.clear();
+        cin.ignore();
+    }
+
+    cout << "\n";
+
+
+    while (board[position-1] != " ")
+    {
+        cout << "Oops! Somebody is already there!";
+
+        cout << "Player" << player << "'s Turn (ENTER 1-9): ";
+        cin >> position;
+
+        cout << "\n";
+        
+    }  
+}
+
+
+void updateBoard()
+{
+    if (player % 2 == 1)
+    {
+        board[position-1] = "X";
+    }
+    else
+    {
+        board[position-1] = "O";
+    }
+}
+
+void changePlayer()
+{
+    if (player == 1)
+    {
+        player ++;
+    }
+    else
+    {
+        player --;
+    }  
+}
+
+void takeTurn()
+{
+    while (!isWinner() && !boardFilled())
+    {
+        setPosition();
+        updateBoard();
+        changePlayer();
+        gameBoard();
+    }
+}
+
+
+void endGame()
+{
+    if (isWinner())
+    {
+        cout << "You win!";
+    }
+    else
+    {
+        cout << "It's a draw!";
+    }
+}
