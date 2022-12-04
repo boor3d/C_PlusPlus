@@ -2,11 +2,14 @@
 
 #include "headers.hpp"
 
+using namespace std;
+
 int main() 
-{
+{     
     intro();
     
-    vis_board();
+    boardDisplay();
 
-    game_board();
+
+    return 0;
 }
